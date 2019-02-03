@@ -6,6 +6,7 @@ from Tkinter import *
 #import tkSimpleDialog
 import re
 from config import key
+from googlemaps import GoogleMaps
 
 '''#Create the window
 root = Tk()
@@ -14,16 +15,31 @@ root = Tk()
 root.geometry("200x100")
 #kick off the event loop'''
 
+####Ask user for their input
 #zipcode = tkSimpleDialog.askstring("Zip Code", "What zip code would you like to search?")
 options =  {1 : "Fast Food", 2 : "Dine in", 3 : "Carryout"}
 print (options) 
 category = raw_input("Please enter a number 1-3 to select the category or enter to select from all:")
 zipcode = raw_input("What zip code would you like to search?")
+
+###Check to make sure zipcode is valid
 while len(zipcode) != 5 or (not zipcode.isdigit()):
-	print 'Zip code must be 5 digits'
+    print 'Zip code must be 5 digits'
     #zipcode = tkSimpleDialog.askstring("Zip Code", "What zip code would you like to search?")
-        zipcode = raw_input("What zip code would you like to search?")
-print("Searching zipcode " +str(zipcode)+"...")
+    zipcode = raw_input("What zip code would you like to search?")
+    print("Searching zipcode " +str(zipcode)+"...")
+
+
+params = {
+        'location' : zipcode,
+        'keyword' : catergory
+        'type' : 'restaurant',
+        'key' : key
+        }
+
+base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+
+resp = requests.get(base_url, params=params)i
 
 data = {}
 with open('Restuarants.csv', 'r') as f:
