@@ -5,6 +5,7 @@ import random
 from Tkinter import *
 #import tkSimpleDialog
 import re
+from config import key
 
 '''#Create the window
 root = Tk()
